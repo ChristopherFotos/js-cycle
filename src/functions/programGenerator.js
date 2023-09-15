@@ -13,24 +13,40 @@ const programGenerator = (movements, length) => {
 	}
 
 	movements.forEach((movement) => {
-		let weights = [];
-		let sets = [];
-		let reps = [];
+		// will need to make a 2D array here...
+		const trainingVariables = {};
+		for (const key in movement.progression[0]) {
+			trainingVariables[key] = [];
+		}
 
-		movement.progression.forEach((progression) => {
-			weights = [...weights, ...progression.weights];
-			sets = [...sets, ...progression.sets];
-			reps = [...reps, ...progression.reps];
+		movement.progression.forEach((progression, i) => {
+			// ...and iterate through it here
+			for (const key in progression) {
+				trainingVariables[key] = [
+					...trainingVariables[key],
+					...progression[key],
+				];
+			}
+
+			// weights = [...weights, ...progression.weights];
+			// sets = [...sets, ...progression.sets];
+			// reps = [...reps, ...progression.reps];
 		});
 
 		movement.days.forEach((day) => {
 			program.forEach((week, i) => {
-				week[day].push({
+				const values = {
 					movement: movement.name,
-					weight: weights[i],
-					sets: sets[i],
-					reps: reps[i],
-				});
+					// weight: weights[i],
+					// sets: sets[i],
+					// reps: reps[i],
+				};
+
+				for (const key in trainingVariables) {
+					values[key] = trainingVariables[key][i];
+				}
+
+				week[day].push(values);
 			});
 		});
 	});
