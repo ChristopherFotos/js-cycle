@@ -1,3 +1,5 @@
+// TODO: add intra-week range and ascending/descending of training variables
+
 const programGenerator = (movements, length) => {
 	const program = [];
 

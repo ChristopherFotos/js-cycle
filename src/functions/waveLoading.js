@@ -1,3 +1,5 @@
+// TODO: add intra-week range ascending/descending of training variables
+
 const waveLoading = ({
 	programLength = 3,
 	blockLength = 4,
